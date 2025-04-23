@@ -1,11 +1,80 @@
-.App {
-  text-align: center;
+
+
+.header{
+  width: 100%;
+  background-color: #17191d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+  gap: 20%;
+  padding: 0.5rem;
+
+  div{
+    flex-basis: 40%;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+
+    .logo{
+      width: 32px;
+    }
+
+    p{
+      color: #228BE6;
+      font-size: 1rem;
+      font-weight: 700;
+
+      span{
+        color: white;
+      }
+    }
+
+
+  }
+
+  .search-form{
+    flex-basis: 40%;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+
+    input{
+      width: 40%;
+      height: 32px;
+      border-radius: 5px;
+      border: 2px solid black;
+      padding: 0 10px;
+      background-color: #17191d;
+      color: white;
+      font-size: 1rem;
+
+      &:focus{
+        outline: none;
+        border: 1px solid #228BE6;
+        background-color: #17191d;
+        color: white;
+      }
+    }
+
+    button{
+      border: none;
+      background-color: #17191d;
+      padding:none;
+
+      .search-icon{
+        width: 32px;
+      }
+    }
+
+    
+  }
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
+
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
@@ -13,20 +82,7 @@
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
 
-.App-link {
-  color: #61dafb;
-}
 
 @keyframes App-logo-spin {
   from {
