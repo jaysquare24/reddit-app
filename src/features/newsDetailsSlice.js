@@ -58,9 +58,19 @@ export const newsDetailsSlice = createSlice({
 
 export const { setSearchTerm} = newsDetailsSlice.actions;
 
+
 //Export selectors
 export const selectSearchTerm = (state) => state.news.searchTerm;
 export const selectNewsDetails = (state) => state.news.newsDetails;
 export const selectLoading = (state) => state.news.loading;
 export const selectError = (state) => state.news.error;
+export const selectFilteredNewsDetails = (state) => {  
+  const newsDetails = state.news.newsDetails;
+  const searchTerm = state.news.searchTerm; // Get the search term from the Redux store
+    
+  return newsDetails.filter((news) =>
+    news.tittle && news.tittle.toLowerCase().includes(searchTerm.toLowerCase())
+  );   
+    
+}
 export default newsDetailsSlice.reducer;
