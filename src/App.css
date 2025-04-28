@@ -72,9 +72,28 @@
   }
 }
 
+.news-detail-container{
+  width:100%;
+  display: flex;
+  border: 2px solid red;
+  align-items: flex-start;
+
+  .subreddit-container{
+    flex-basis: 25%;
+    margin-top: 20px;
+    margin-left: 20px;
+    background-color: #17191d;
+
+    .subreddit-list,h2{
+      margin-left: 20px;
+    }
+
+  }
+}
+
 
 .news-details{
-  width: 70%;
+  flex-basis: 70%;
   margin-top: 20px;
   margin-left: 20px;
   
@@ -98,7 +117,6 @@
      
     }
     .news-bottom{
-      
       display: flex;
       align-items: center;
       justify-content: space-around;

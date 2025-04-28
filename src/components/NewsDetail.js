@@ -1,7 +1,12 @@
+import React from "react";
 import { selectNewsDetails, selectLoading, selectError, selectSearchTerm, selectFilteredNewsDetails } from "../features/newsDetailsSlice";
-import { useSelector } from "react-redux";
-import {getRelativeTime} from "../utilities";
-import { useState } from "react"; // Import useState
+import { useSelector, useDispatch } from "react-redux";
+import { getRelativeTime } from "../utilities";
+import { useState, useEffect } from "react"; // Import useState
+import { CommentsDetails } from "./CommentsDetails";
+import { fetchCommentsDetails } from "../features/commentsSlice";
+import { fetchNews } from "../features/newsDetailsSlice"; // Import the fetchNews action
+import { SubReddits } from "./SubReddits";  
 
 export const NewsDetail = () => {
     const newsDetails = useSelector(selectNewsDetails);
@@ -9,77 +14,59 @@ export const NewsDetail = () => {
     const newsData = useSelector(selectFilteredNewsDetails); // Get the filtered news details from the Redux store
     const loading = useSelector(selectLoading);
     const error = useSelector(selectError);
-    const [visibleComments, setVisibleComments] = useState({}); // State to track visible comments
+    const dispatch = useDispatch(); // Initialize the dispatch function
+    const [visibleCommentId, setVisibleCommentId] = useState(null); // State to track the currently visible comment section
+   
+    
 
-    const toggleComments = (index) => {
-        setVisibleComments((prev) => ({
-            [index]: !prev[index], // Toggle visibility for the specific news item
-        }));
+    const handleClick = (id, commentLink) => {
+        if (visibleCommentId === id) {
+            setVisibleCommentId(null); // Hide the comment section if it's already visible
+        } else {
+            setVisibleCommentId(id); // Show the selected comment section
+            dispatch(fetchCommentsDetails(commentLink)); // Fetch comments for the selected news item
+        }
     };
 
-    if (loading) {
-        return <div>Loading...</div>;
-    }
-
-    if (error) {
-        return <div>Error: {error}</div>;
-    }
-
-
     return (
-        <div className="news-details">
-            {newsDetails ? (
-                newsData.length > 0 ? (
-                    newsData.map((news, index) => (
-                        <div key={index} className="news-item">
-                            <h2>{news.tittle}</h2>
-                            <img className="news-image"src={news.image} alt={news.tittle} />
-                            <div className="news-bottom">
-                                <p>Posted by: {news.postedBy}</p>
-                                <p>Created at: {getRelativeTime(news.createdAt)}</p>
-                                <p
-                                    className="comments"
-                                    onClick={() => toggleComments(index)} // Add onClick handler
-                                >
-                                    Comments: {news.comments.length}
-                                </p>
-                                <p>Likes: {news.numOfLikes}</p>
-
-                            </div>
-                            {visibleComments[index] && ( // Conditionally render comments
-                                    <ul className="comments-list">
-                                        {news.comments.map((comment, index) => (
-                                            <li className="comment" key={index}>
-                                                <div className="comment-header">
-                                                    <div className="user-info">
-                                                        <img 
-                                                            className="profile-imge"
-                                                            src={comment.profilePic} 
-                                                            alt={`${comment.postedBy}'s profile`} 
-                                                            style={{ width: "15px", height:"20px", marginRight: "10px"}} 
-                                                        />
-                                                        <p>{comment.postedBy}</p>
-                                                    
-                                                    </div>
-                                                    <p>{getRelativeTime(comment.createdAt)}</p>
-                                                </div>
-                                                
-                                                <p>{comment.comment}</p>
-                                                    
-                                            </li>
-                                        ))}
-                                    </ul>
+        <div className="news-detail-container">
+            <div className="subreddit-container">
+                <SubReddits /> {/* Include the SubReddits component */}
+            </div>
+            <div className="news-details">
+                {loading && <div>Loading...</div>} {/* Show loading state */}
+                {error && <div>Error: {error}</div>} {/* Move error check here */}
+                {!loading && !error && newsDetails ? (
+                    Object.keys(newsData).length > 0 ? (
+                        Object.entries(newsData).map(([id, news]) => (
+                            <div key={id} className="news-item">
+                                <h2>{news.tittle}</h2>
+                                <img className="news-image" src={news.image} alt={news.tittle} />
+                                <div className="news-bottom">
+                                    <p>Posted by: {news.postedBy}</p>
+                                    <p>Created at: {getRelativeTime(news.createdAt)}</p>
+                                    <p
+                                        className="comments"
+                                        onClick={() => handleClick(id, news.commentLink)} // Add onClick handler
+                                    >
+                                        Comments: {news.numOfComments}
+                                    </p>
+                                    <p>Likes: {news.numOfLikes}</p>
+                                </div>
+                                {visibleCommentId === id && ( // Conditionally render comments for the currently visible section
+                                    <div className="comments-section">
+                                        <CommentsDetails newsId={news.newsId} /> {/* Pass the news ID to CommentsDetails */}
+                                    </div>
                                 )}
-                        </div>
-                    ))
+                            </div>
+                        ))
+                    ) : (
+                        searchTerm && <p>No Post available for "{searchTerm}"</p>
+                    )
                 ) : (
-                    searchTerm && (
-                        <p>No Post available for "{searchTerm}"</p>
-                    ) 
-                )
-            ) : (
-                <p>No Post available</p>
-            )}
+                    !loading && !error && <p>No Post available</p> // Ensure this only renders when not loading or error
+                )}
+            </div>
         </div>
     );
 };
