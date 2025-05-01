@@ -1,3 +1,8 @@
+.App{
+  border: 2px solid red;
+  box-sizing: border-box;
+}
+
 .header{
   width: 100%;
   background-color: #17191d;
@@ -9,7 +14,7 @@
   gap: 20%;
   padding: 0.5rem;
 
-  div{
+  .reddit-logo{
     flex-basis: 40%;
     display: flex;
     gap: 10px;
@@ -29,8 +34,6 @@
         color: white;
       }
     }
-
-
   }
 
   .search-form{
@@ -72,37 +75,75 @@
   }
 }
 
-.news-detail-container{
+.content-container{
+  border: 2px solid rgb(19, 165, 95);
   width:100%;
   display: flex;
-  border: 2px solid red;
   align-items: flex-start;
+  justify-content: space-evenly;
+  margin-top: 20px;
 
   .subreddit-container{
+    border: 2px solid rgb(234, 225, 225);
     flex-basis: 25%;
-    margin-top: 20px;
-    margin-left: 20px;
+    border-radius: 5px;
     background-color: #17191d;
 
     .subreddit-list,h2{
+      
       margin-left: 20px;
+      border: 2px solid red;
+    }
+
+    .subreddit-list {
+      max-height: 420px; /* Set a maximum height */
+      overflow-y: auto; /* Enable vertical scrolling */
+      scrollbar-color: rgb(167, 166, 166) rgb(65, 65, 65); /* Set thumb and track colors */
+      scrollbar-width: thin; /* For Firefox */
+      margin-right:5px;
+      
+      
+    }
+
+    .subreddit-item{
+      flex-basis: 90%;
+      background-color: #2a2c31;
+      padding: 10px;
+      border-radius: 5px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      transition: box-shadow, border-left, color, 0.3s ease-in-out;
+
+      &:hover{
+      cursor: pointer;
+      
+      box-shadow: 0 2px 5px rgb(148, 147, 147);
+      }
+
+      &.active{
+        border-left: 3px solid #228BE6;
+        color: #228BE6 ;
+      }
     }
 
   }
 }
 
 
-.news-details{
+.news-container{
+  border: 2px solid white;
   flex-basis: 70%;
-  margin-top: 20px;
-  margin-left: 20px;
+ 
   
   .news-item{
-    
+
+    border: 2px solid red;
     background-color: #17191d;
     padding: 10px;
     border-radius: 5px;
     margin-bottom: 30px;
+
+    
 
     h2{
      
@@ -113,7 +154,9 @@
       width: 80%;
       display: block;
       margin: auto;
-      height: 250px;
+      min-height: auto;
+      max-height: 450px;
+      border-radius: 5px;
      
     }
     .news-bottom{
@@ -121,20 +164,26 @@
       align-items: center;
       justify-content: space-around;
       margin-top: 10px;
-      border-top: 1.2px solid #2a2c31 ;
+      border-top: 1.5px solid #2a2c31;
+      
+      img{
+        vertical-align: middle;
+        width: 25px;
+        margin-right: 5px;
+      }
+
+      .comments{
+        cursor: pointer;
+      }
+      
     }
 
-    ul{
-      
-      list-style: none;
+    .comments-container{
       width: 95%;
       margin-top: 10px;
       margin: auto;
       
-      
-      
-
-      li{
+      .comment{
         background-color: #2a2c31;
         padding: 5px 15px;
         border-radius: 5px;
@@ -156,34 +205,137 @@
         align-items: center;
         justify-content: space-between;
         
-
+ 
         div:first-child {
           display: flex;
           align-items: center;
           
         }
+
+        img{
+          width: 20px;
+          margin-right: 3px;
+          vertical-align: middle;
+        }
       }
       
       
     }
+
+  
   }
+
+  
 }
 
-
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+.search-fallback {
+  
+  flex-basis: 70%;
+  margin-top: 20px;
+  margin-left: 20px;
+  align-items: center;
+  justify-content: center;
+  justify-items: center;
+  
+  p{
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 700;
   }
+
+  button{
+    background-color: #228BE6;  
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+
+    &:hover{
+      background-color: #1a6bbd;
+      
+    }
+  }
+
 }
 
+/* Add a comment to ensure developers dynamically toggle the .active class in their scripts */
 
+@media (max-width: 450px) {
+  .content-container {
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    width: 95%;
+    margin: 20px auto 0;
+    
+    
+    .subreddit-container {
+      order: 1; /* Move the first container to the last position */
+      flex-basis: 100%;/* Take full width on small screens */
+      margin-bottom: 20px;
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+      h2{
+        margin-left: 0px;
+        padding-left: 5px;
+        font-size: small;
+       
+      }
+  
+      .subreddit-list {
+       
+        flex-basis: 100%; /* Full width */
+        display: flex;
+        flex-wrap: wrap;
+        max-height: none; /* Remove maximum height */
+        overflow:visible; /* Disable scrolling */
+        scrollbar-color: unset; /* Reset scrollbar colors */
+        scrollbar-width: none; /* Remove scrollbar for Firefox */
+        margin-right:0px;
+        margin-left: 0px;
+        align-items:flex-start;
+        gap:3px;
+        
+        
+        
+      }
+
+      .subreddit-item{
+        border: 1px solid white;
+        flex-basis: 15%; /* Full width */
+        margin-left: 3px;
+        margin-top: 0;
+        text-align: center;
+        font-size: 0.5rem;
+        font-weight: 500;
+        padding: 5px 0;
+       
+      }
+
+      .subreddit-item:last-child{
+        flex-basis: 25%;
+      }
+  
+      
+      
+    }
+
+    .news-container {
+      order: 2; /* Move the last container to the first position */
+      width: 100%;/* Take full width on small screens */
+    
+      
+    }
+  
+    
   }
-  to {
-    transform: rotate(360deg);
-  }
+
+  
+
+ 
+    
+  
+  
 }

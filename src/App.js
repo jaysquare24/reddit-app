@@ -1,32 +1,23 @@
-import { Header } from './components/Header';
-import { NewsDetail } from './components/NewsDetail';
-import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { fetchNewsRep } from './features/newsDetailsSlice';
-import { fetchCommentsRep } from './features/commentsSlice';
-
-
+import { NewsDetails } from './components/NewsDetails';
+import{ Root } from './components/Root';
+import { SearchFallback } from './components/SearchFallback';
+import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from 'react-router-dom';
 import './App.css';
 
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route path="/" element={<Root />}>
+      <Route index element={<NewsDetails />} />
+      <Route path="search" element={<SearchFallback/>} />
+    </Route>
+  )
+);
+
 function App() {
-  
-
-  const dispatch = useDispatch(); // Initialize the dispatch function
-    
-
-  useEffect(() => {
-    dispatch(fetchNewsRep()); // Dispatch the action to fetch news details
-  }, [dispatch]);
-
-  useEffect(() => {
-    dispatch(fetchCommentsRep()); // Dispatch the action to fetch news details
-  }, [dispatch]);
-    
     
   return (
     <div className="App">
-      <Header/>
-      <NewsDetail/>
+      <RouterProvider router={router} />  
     </div>
   );
 }

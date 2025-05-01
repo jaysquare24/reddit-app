@@ -1,59 +1,46 @@
-import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React from 'react';
+import { useSelector } from 'react-redux';
 import { selectCommentsDetails, selectCommentsLoading, selectCommentsError } from '../features/commentsSlice';
 import { getRelativeTime } from '../utilities';
-import { fetchCommentsDetails } from '../features/commentsSlice';
 
-
-export const CommentsDetails = ({newsId}) => {
+export const CommentsDetails = ({ newsId }) => {
     const commentsDetails = useSelector(selectCommentsDetails) || {}; // Ensure commentsDetails is an object
     const loading = useSelector(selectCommentsLoading);
     const error = useSelector(selectCommentsError);
-    const dispatch = useDispatch(); // Initialize the dispatch function
-
-   
-
-
-
-        
-
 
     if (loading) {
         return <div>Loading...</div>;
     }
 
     if (error) {
-        return <div>Error: {error}</div>;
+        return <div>Error fetching comments: {error}</div>;
     }
 
     return (
-        <ul className="comments-lists">
+        <div className="comments-container">
             {commentsDetails && Object.keys(commentsDetails).length > 0 ? (
-                Object.entries(commentsDetails).map(([id, comment]) => (
-                     // This is where the log happens
-                    comment && comment.commentsDetailsId === newsId && (
-                        <li key={id} className="comment">
-                            <div className="comment-header">
-                                <div className="user-info">
-                                    <img
-                                        className="profile-imge"
-                                        src={comment.profilePic}
-                                        alt={`${comment.postedBy}'s profile`}
-                                        style={{ width: "15px", height: "20px", marginRight: "10px" }}
-                                    />
-                                    <p>{comment.postedBy}</p>
-                                </div>
-                                <p>{getRelativeTime(comment.createdAt)}</p>
-                            </div>
-                            <p>{comment.comment}</p>
-                            <p>Likes: {comment.numOfLikes}</p>
-                        </li>
-                    )
-                ))
-            ) : (
-                <p>No comments available.</p>
+            Object.entries(commentsDetails).map(([id, comment]) => (
+            comment && comment.commentsDetailsId === newsId && (
+            <div key={id} className="comment">
+                <div className="comment-header">
+                    <div className="user-info">
+                        <p> Username: {comment.postedBy}</p>
+                    </div>
+                    <p>{getRelativeTime(comment.createdAt)}</p>
+                    <p>
+                        <img 
+                            src="https://img.icons8.com/?size=100&id=66627&format=png&color=FFFFFF" 
+                            alt="like icon" 
+                        />
+                        {comment.numOfLikes}
+                    </p>
+                </div>
+                <p>{comment.comment}</p>
+            </div>
+            )))) : (
+            <p>No Comment Available.</p>
             )}
-        </ul>
+        </div>
     );
-}
+};
 

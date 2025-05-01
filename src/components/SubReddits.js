@@ -1,53 +1,38 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { fetchNews } from "../features/newsDetailsSlice";
+import { subReddits } from "../features/subRedditsData";
+import  { useNavigate } from "react-router-dom";
+import { clearSearchTerm } from "../features/newsDetailsSlice";
 
 export const SubReddits = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate(); 
+  const [activeSubReddit, setActiveSubReddit] = useState("r/popular");
 
-  const dispatch = useDispatch(); // Initialize the dispatch function
-  
-  React.useEffect(() => {
-    // Fetch news for the default subreddit when the component mounts
-    dispatch(fetchNews()); // No argument needed, default is "r/technology"
-}, [dispatch]);
+  const handleClick = (subReddit) => {
+    setActiveSubReddit(subReddit);
+    dispatch(fetchNews(subReddit));
+    dispatch(clearSearchTerm());
+    navigate("/"); // Navigate to the home page after fetching news
+  };
 
-    const handleClick = (subreddit) => {
-        // Dispatch the action to fetch news based on the subreddit
-        dispatch(fetchNews(subreddit));
-    }
-    return (
-        
-        <>
-            <h2>Subreddit</h2>
-            <div className="subreddit-list">
-                <p className="subreddit-item" onClick={() => handleClick("r/technology")}>r/technology</p>
-                <p className="subreddit-item">r/science</p>
-                <p className="subreddit-item">r/worldnews</p>
-                <p className="subreddit-item" onClick={() => handleClick("r/politics")}>r/politics</p>
-                <p className="subreddit-item">r/business</p>
-                <p className="subreddit-item">r/education</p>
-                <p className="subreddit-item">r/environment</p>
-                <p className="subreddit-item">r/finance</p>
-                <p className="subreddit-item">r/AskReddit</p>
-                <p className="subreddit-item">r/space</p>
-                <p className="subreddit-item">r/health</p>
-                <p className="subreddit-item">r/food</p>
-                <p className="subreddit-item">r/sports</p>
-                <p className="subreddit-item">r/music</p>
-                <p className="subreddit-item">r/movies</p>
-                <p className="subreddit-item">r/books</p>
-                <p className="subreddit-item">r/gaming</p>
-                <p className="subreddit-item">r/art</p>
-                <p className="subreddit-item">r/history</p>
-                <p className="subreddit-item">r/photography</p>
-                <p className="subreddit-item">r/travel</p>
-                <p className="subreddit-item">r/woahthatsinteresting</p>
-                
-            </div>
-            
-        </>
-           
-        
-    );
-}
+
+  return (
+    <section className="subreddit-container">
+      <h2>Subreddit</h2>
+      <div className="subreddit-list">
+        {subReddits.map((subReddit) => (
+          <p
+            key={subReddit.name}
+            className={`subreddit-item ${activeSubReddit === subReddit.name ? "active" : ""}`}
+            onClick={() => handleClick(subReddit.name)}
+          >
+            {subReddit.label}
+          </p>
+        ))}
+      </div>
+    </section>
+  );
+};
 
