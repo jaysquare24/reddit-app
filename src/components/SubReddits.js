@@ -11,6 +11,12 @@ export const SubReddits = () => {
   const [activeSubReddit, setActiveSubReddit] = useState("r/popular");
 
   const handleClick = (subReddit) => {
+    const subRedditContainer = document.getElementById("subreddit-container");
+    const menuIcon = document.getElementById("menu-icon");
+
+    subRedditContainer.style.display = "none"; // Hide the subreddit container on click
+    menuIcon.src = "https://img.icons8.com/?size=100&id=Rdp3AydLFY2A&format=png&color=000000";
+    
     setActiveSubReddit(subReddit);
     dispatch(fetchNews(subReddit));
     dispatch(clearSearchTerm());
@@ -19,8 +25,8 @@ export const SubReddits = () => {
 
 
   return (
-    <section className="subreddit-container">
-      <h2>Subreddit</h2>
+    <section className="subreddit-container" id="subreddit-container">
+      <h2>Subreddits</h2>
       <div className="subreddit-list">
         {subReddits.map((subReddit) => (
           <p

@@ -3,7 +3,7 @@ import { createSelector } from "reselect";
 
 export const fetchNews = createAsyncThunk(
   "news/fetchNews",
-  async (subReddit = "r/popular", { rejectWithValue }) => {
+  async (subReddit = "r/pics", { rejectWithValue }) => {
     try {
       const response = await fetch(`https://www.reddit.com/${subReddit}.json`);
       if (!response.ok) {

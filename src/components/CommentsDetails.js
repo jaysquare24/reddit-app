@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { selectCommentsDetails, selectCommentsLoading, selectCommentsError } from '../features/commentsSlice';
-import { getRelativeTime } from '../utilities';
+import { getRelativeTime, formatNumber } from '../utilities';
 
 export const CommentsDetails = ({ newsId }) => {
     const commentsDetails = useSelector(selectCommentsDetails) || {}; // Ensure commentsDetails is an object
@@ -24,7 +24,7 @@ export const CommentsDetails = ({ newsId }) => {
             <div key={id} className="comment">
                 <div className="comment-header">
                     <div className="user-info">
-                        <p> Username: {comment.postedBy}</p>
+                        <p> Username: <span className="comment-username">{comment.postedBy}</span></p>
                     </div>
                     <p>{getRelativeTime(comment.createdAt)}</p>
                     <p>
@@ -32,7 +32,7 @@ export const CommentsDetails = ({ newsId }) => {
                             src="https://img.icons8.com/?size=100&id=66627&format=png&color=FFFFFF" 
                             alt="like icon" 
                         />
-                        {comment.numOfLikes}
+                        {formatNumber(comment.numOfLikes)} 
                     </p>
                 </div>
                 <p>{comment.comment}</p>

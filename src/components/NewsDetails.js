@@ -10,7 +10,7 @@ import {
     fetchNews 
 } from "../features/newsDetailsSlice"; 
 import { fetchCommentsDetails } from "../features/commentsSlice";
-import { getRelativeTime } from "../utilities";
+import { getRelativeTime, formatNumber } from "../utilities";
 import { CommentsDetails } from "./CommentsDetails";
 
 
@@ -45,10 +45,10 @@ export const NewsDetails = () => {
             Object.keys(newsData).length > 0 ? (
             Object.entries(newsData).map(([id, news]) => (
             <div key={id} className="news-item">
-                <h2>{news.title}</h2>
+                <h4>{news.title}</h4>
                 <img className="news-image" src={news.image} alt={news.title} />
                 <div className="news-bottom">
-                    <p>Posted By: {news.postedBy}</p>
+                    <p>Posted By: <span className="profile-username">{news.postedBy}</span></p>
                     <p>{getRelativeTime(news.createdAt)}</p>
                     <p
                         className="comments"
@@ -58,14 +58,14 @@ export const NewsDetails = () => {
                             src="https://img.icons8.com/?size=100&id=47732&format=png&color=FFFFFF" 
                             alt="Comments Icon" 
                         />
-                        {news.numOfComments}
+                        {formatNumber(news.numOfComments)}
                     </p>
                     <p>
                         <img 
                             src="https://img.icons8.com/?size=100&id=66627&format=png&color=FFFFFF" 
                             alt="Likes icon" 
                         />
-                        {news.numOfLikes}
+                        {formatNumber(news.numOfLikes)}
                     </p>
                 </div>
                 {visibleCommentId === id && (

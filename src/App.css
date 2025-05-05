@@ -1,7 +1,4 @@
-.App{
-  border: 2px solid red;
-  box-sizing: border-box;
-}
+
 
 .header{
   width: 100%;
@@ -9,10 +6,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
   color: white;
   gap: 20%;
   padding: 0.5rem;
+  position: sticky;
+  top: 0;
 
   .reddit-logo{
     flex-basis: 40%;
@@ -73,10 +71,15 @@
 
     
   }
+
+  .menu-button{
+    
+    display: none;
+  }
 }
 
 .content-container{
-  border: 2px solid rgb(19, 165, 95);
+ 
   width:100%;
   display: flex;
   align-items: flex-start;
@@ -84,15 +87,19 @@
   margin-top: 20px;
 
   .subreddit-container{
-    border: 2px solid rgb(234, 225, 225);
+   
     flex-basis: 25%;
     border-radius: 5px;
     background-color: #17191d;
+    position: sticky;  /* Fix it to the screen */
+    top: 90px;   /* Align it to the top of the viewport */
+   
+   
 
-    .subreddit-list,h2{
-      
+    h2{
+      color: #228BE6;
       margin-left: 20px;
-      border: 2px solid red;
+      
     }
 
     .subreddit-list {
@@ -101,12 +108,14 @@
       scrollbar-color: rgb(167, 166, 166) rgb(65, 65, 65); /* Set thumb and track colors */
       scrollbar-width: thin; /* For Firefox */
       margin-right:5px;
+      margin-left: 20px;
       
       
     }
 
     .subreddit-item{
-      flex-basis: 90%;
+     
+      width: 90%;
       background-color: #2a2c31;
       padding: 10px;
       border-radius: 5px;
@@ -131,13 +140,13 @@
 
 
 .news-container{
-  border: 2px solid white;
+  
   flex-basis: 70%;
+ 
  
   
   .news-item{
 
-    border: 2px solid red;
     background-color: #17191d;
     padding: 10px;
     border-radius: 5px;
@@ -145,7 +154,7 @@
 
     
 
-    h2{
+    h4{
      
       text-align: center;
     }
@@ -157,6 +166,8 @@
       min-height: auto;
       max-height: 450px;
       border-radius: 5px;
+      font-size: 0.5rem;
+      font-weight: 100;
      
     }
     .news-bottom{
@@ -165,10 +176,20 @@
       justify-content: space-around;
       margin-top: 10px;
       border-top: 1.5px solid #2a2c31;
+
+      .profile-username{
+        color: #228BE6;
+        font-weight: 700;
+      }
+
+      p{
+        font-size: 0.8rem;
+        font-weight: 300;
+      }
       
       img{
         vertical-align: middle;
-        width: 25px;
+        width: 20px;
         margin-right: 5px;
       }
 
@@ -191,6 +212,9 @@
         font-size: 0.8rem;
         font-weight: 700;
         margin-bottom: 10px;
+        font-size: 0.8rem;
+        font-weight: 400;
+        line-height: 2;
         transition: box-shadow 0.3s ease-in-out;
 
         &:hover{
@@ -204,6 +228,13 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
+        font-size: 0.7rem;
+        font-weight: 250;
+
+        .comment-username{
+          color:#228BE6;
+          font-weight: 600;
+        }
         
  
         div:first-child {
@@ -213,7 +244,7 @@
         }
 
         img{
-          width: 20px;
+          width: 18px;
           margin-right: 3px;
           vertical-align: middle;
         }
@@ -229,10 +260,10 @@
 }
 
 .search-fallback {
-  
+  border: 1px solid red;
   flex-basis: 70%;
-  margin-top: 20px;
-  margin-left: 20px;
+  
+  
   align-items: center;
   justify-content: center;
   justify-items: center;
@@ -265,17 +296,81 @@
 /* Add a comment to ensure developers dynamically toggle the .active class in their scripts */
 
 @media (max-width: 450px) {
+
+  .header{
+    
+    gap: 5%;
+    padding: 0.2rem;
+  
+    .reddit-logo{
+      
+      flex-basis: 40%;
+      display: flex;
+      gap: 5px;
+      
+      .logo{
+        width: 20px;
+      }
+  
+      p{
+        font-size: 0.7rem;
+       
+      }
+    }
+  
+    .search-form{
+      
+      flex-basis: 43%;
+      gap: 2px;
+    
+      input{
+        width: 60%;
+        height: 25px;
+        font-size: 0.7rem;
+      }
+  
+      button{
+        .search-icon{
+          width: 20px;
+        }
+      }
+  
+      
+    }
+
+    nav{
+      
+      flex-basis: 12%;
+    }
+  
+    .menu-button{
+      display: flex;
+      background-color: #17191d;
+      border: none;
+      img{
+        width: 20px;
+      }
+    }
+  }
+
   .content-container {
+   
     display: flex;
     flex-direction: column; /* Stack items vertically */
     width: 95%;
-    margin: 20px auto 0;
+    margin: 10px auto 0;
     
     
     .subreddit-container {
+      display: none; /* Hide the subreddit container on small screens */
       order: 1; /* Move the first container to the last position */
       flex-basis: 100%;/* Take full width on small screens */
-      margin-bottom: 20px;
+      margin-bottom: 10px;
+      position: sticky;
+      border-radius: 0px;
+      top:10.5%;
+      
+      
 
       h2{
         margin-left: 0px;
@@ -323,8 +418,63 @@
     }
 
     .news-container {
-      order: 2; /* Move the last container to the first position */
-      width: 100%;/* Take full width on small screens */
+     
+      order: 2; 
+      flex-basis: 100%;
+      
+      .news-item{
+        
+        margin-bottom: 15px;
+        h4{
+          font-size: 0.8rem;
+          text-align: center;
+          font-weight: 400;
+        }
+        .news-image{ 
+          max-height: 300px;
+          font-size: 0.5rem;
+          font-weight: 100;
+         
+        }
+        .news-bottom{
+          
+          img{
+  
+            width: 13px;
+            margin-right: 3px;
+          }
+
+          p{
+            font-size: 0.55rem;
+            font-weight: 200;
+          }
+        }
+    
+        .comments-container{
+          
+          .comment{
+            font-size: 0.55rem;
+            font-weight: 400;
+            line-height: 1.5;
+            
+          }
+    
+          .comment-header{ 
+            font-size: 0.55rem;
+            font-weight: 150;
+    
+            img{
+              width: 13px;
+              margin-right: 3px;
+              
+            }
+          }
+          
+         
+        }
+    
+      
+      }
     
       
     }
@@ -332,10 +482,42 @@
     
   }
 
+  .search-fallback{
   
+    order: 2;
+    width: 100%;
 
- 
+    p{
+      
+      font-size: 0.8rem;
+      font-weight: 300;
+    }
+  
+    button{
+      
+      padding: 5px 10px;
+      border-radius: 5px;
+      font-size: 0.8rem;
+      font-weight: 400;
     
+    }
   
-  
+  }
+
+}
+
+@media (max-width: 325px){
+
+  .subreddit-container
+  .subreddit-list{
+    .subreddit-item{
+      flex-basis: 13%;
+      padding: 3px 3px;
+
+      &:last-child{
+        flex-basis: 32%;
+      }
+    }
+  }
+
 }
