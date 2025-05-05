@@ -262,9 +262,8 @@
 .search-fallback {
  
   flex-basis: 70%;
-  align-items: center;
-  justify-content: center;
-  justify-items: center;
+  padding: auto 50%;
+  
   
   p{
     color: white;
