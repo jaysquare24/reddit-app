@@ -483,11 +483,9 @@
   }
 
   .search-fallback{
-    border: 1px solid red;
-    
     order: 2;
     margin: auto;
-    
+    justify-items: center;
     
     
     
