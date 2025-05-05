@@ -265,7 +265,6 @@
  
   flex-basis: 70%;
   align-items: center;
-  justify-content: center;
   justify-items: center;
   
   
@@ -484,9 +483,11 @@
   }
 
   .search-fallback{
+    border: 1px solid red;
     
     order: 2;
     margin: auto;
+    
     
     
     
@@ -498,8 +499,8 @@
     }
   
     button{
-      border: 1px solid white;
-      justify-self: center;
+      
+      
       padding: 5px 10px;
       border-radius: 5px;
       font-size: 0.8rem;
