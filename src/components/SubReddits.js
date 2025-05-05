@@ -14,9 +14,13 @@ export const SubReddits = () => {
     const subRedditContainer = document.getElementById("subreddit-container");
     const menuIcon = document.getElementById("menu-icon");
 
-    subRedditContainer.style.display = "none"; // Hide the subreddit container on click
+    // Apply style change only for mobile devices (screen width <= 768px)
+    if (window.innerWidth <= 450) {
+        subRedditContainer.style.display = "none"; // Hide the subreddit container on click
+    }
+
     menuIcon.src = "https://img.icons8.com/?size=100&id=Rdp3AydLFY2A&format=png&color=000000";
-    
+
     setActiveSubReddit(subReddit);
     dispatch(fetchNews(subReddit));
     dispatch(clearSearchTerm());
@@ -25,7 +29,7 @@ export const SubReddits = () => {
 
 
   return (
-    <section className="subreddit-container" id="subreddit-container">
+    <section className="subreddit-container" id="hidden">
       <h2>Subreddits</h2>
       <div className="subreddit-list">
         {subReddits.map((subReddit) => (
