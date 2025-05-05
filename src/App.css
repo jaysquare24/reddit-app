@@ -260,10 +260,8 @@
 }
 
 .search-fallback {
-  border: 1px solid red;
+ 
   flex-basis: 70%;
-  
-  
   align-items: center;
   justify-content: center;
   justify-items: center;
@@ -445,7 +443,7 @@
           }
 
           p{
-            font-size: 0.55rem;
+            font-size: 0.6rem;
             font-weight: 200;
           }
         }
@@ -486,6 +484,9 @@
   
     order: 2;
     width: 100%;
+    align-items: center;
+    justify-content: center;
+    justify-items: center;
 
     p{
       
