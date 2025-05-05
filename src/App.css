@@ -484,10 +484,11 @@
   }
 
   .search-fallback{
-  
+    
     order: 2;
-    width: 100%;
-    padding: auto 50%;
+    margin: auto;
+    
+    
     
 
     p{

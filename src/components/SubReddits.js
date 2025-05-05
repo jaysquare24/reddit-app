@@ -29,7 +29,7 @@ export const SubReddits = () => {
 
 
   return (
-    <section className="subreddit-container" id="hidden">
+    <section className="subreddit-container" id="subreddit-container">
       <h2>Subreddits</h2>
       <div className="subreddit-list">
         {subReddits.map((subReddit) => (
