@@ -1,70 +1,101 @@
-# Getting Started with Create React App
+# Reddit Minimal App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A React-based web application that allows users to browse and search Reddit posts. This project demonstrates the use of modern React features, including hooks, state management with Redux, routing with React Router, and API integration.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+### General Features
+- Browse top posts from Reddit.
+- Search for posts by keywords.
+- Responsive design for mobile and desktop.
+- Easy-to-use interface.
 
-### `npm start`
+### Header Component
+- Displays the application logo and title.
+- Includes a search form for searching Reddit posts.
+- Provides a menu button to toggle the visibility of the subreddit navigation.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### SubReddits Component
+- Displays a list of predefined subreddits.
+- Allows users to select a subreddit, fetch its posts, and navigate to the home page.
+- Highlights the currently active subreddit.
+- Clears the search term when a new subreddit is selected.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### NewsDetails Component
+- Fetches and displays a list of Reddit posts.
+- Filters posts based on a search term.
+- Displays post details, including title, image, author, creation time, number of comments, and likes.
+- Allows users to toggle the visibility of comments for individual posts.
+- Handles loading and error states during data fetching.
 
-### `npm test`
+### CommentsDetails Component
+- Fetches and displays comments for a specific Reddit post.
+- Shows the username, relative time, number of likes, and the comment text for each comment.
+- Handles loading and error states during data fetching.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### SearchFallback Component
+- Displays a message indicating that no posts are available for the current search term.
+- Provides a button to navigate back to the home page and clear the search term.
 
-### `npm run build`
+### State Management
+- Fetches news posts from a specified subreddit using the Reddit API.
+- Fetches comments for a specific Reddit post using the Reddit API.
+- Stores and manages fetched data in the Redux store.
+- Provides actions for setting and clearing a search term.
+- Includes selectors for accessing and filtering news data based on the search term.
+- Handles loading and error states during API calls.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Installation
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+To get started with the project, clone the repository and install the dependencies:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```bash
+git clone <repository-url>
+cd reddit-app
+npm install
+```
 
-### `npm run eject`
+## Usage
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+1. Start the development server using `npm start`.
+2. Open [http://localhost:3000](http://localhost:3000) in your browser.
+3. Use the search bar to find posts or browse the default feed.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Project Structure
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+The project is organized into the following key components:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- **Header**: Displays the application logo, search form, and menu button.
+- **SubReddits**: Allows users to navigate between different subreddits.
+- **NewsDetails**: Displays a list of Reddit posts and their details.
+- **CommentsDetails**: Displays comments for a specific Reddit post.
+- **SearchFallback**: Provides a fallback UI when no posts match the search term.
 
-## Learn More
+## Technologies Used
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- **React**: For building the user interface.
+- **Redux Toolkit**: For state management.
+- **React Router**: For routing and navigation.
+- **Reddit API**: For fetching posts and comments.
+- **CSS**: For styling the application.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Contributing
 
-### Code Splitting
+Contributions are welcome! To contribute:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+1. Fork the repository.
+2. Create a new branch for your feature or bug fix.
+3. Commit your changes and push the branch.
+4. Submit a pull request.
 
-### Analyzing the Bundle Size
+## License
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+This project is licensed under the MIT License. See the LICENSE file for details.
 
-### Making a Progressive Web App
+## Acknowledgments
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+- [Reddit API](https://www.reddit.com/dev/api/) for providing the data.
+- [React](https://reactjs.org/) for the framework.
+- [Redux Toolkit](https://redux-toolkit.js.org/) for state management.
+- [React Router](https://reactrouter.com/) for routing.
 
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
