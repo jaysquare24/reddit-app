@@ -2,7 +2,7 @@ import { NewsDetails } from './components/NewsDetails';
 import{ Root } from './components/Root';
 import { SearchFallback } from './components/SearchFallback';
 import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from 'react-router-dom';
-import './App.css';
+import './App.scss';
 
 const router = createBrowserRouter(
   createRoutesFromElements(

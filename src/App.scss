@@ -293,7 +293,6 @@
 
 }
 
-/* Add a comment to ensure developers dynamically toggle the .active class in their scripts */
 
 @media (max-width: 450px) {
 
@@ -399,7 +398,7 @@
 
       .subreddit-item{
         border: 1px solid white;
-        flex-basis: 15%; /* Full width */
+        flex-basis: 15%; 
         margin-left: 3px;
         margin-top: 0;
         text-align: center;

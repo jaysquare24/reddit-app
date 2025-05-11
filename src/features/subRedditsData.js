@@ -1,5 +1,5 @@
 export const subReddits = [
-  { name: "r/popular", label: "Home" },
+  { name: "r/pics", label: "Home" },
   { name: "r/technology", label: "Technology" },
   { name: "r/science", label: "Science" },
   { name: "r/worldnews", label: "Worldnews" },

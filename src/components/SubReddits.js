@@ -8,13 +8,13 @@ import { clearSearchTerm } from "../features/newsDetailsSlice";
 export const SubReddits = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate(); 
-  const [activeSubReddit, setActiveSubReddit] = useState("r/popular");
+  const [activeSubReddit, setActiveSubReddit] = useState("r/pics");
 
   const handleClick = (subReddit) => {
     const subRedditContainer = document.getElementById("subreddit-container");
     const menuIcon = document.getElementById("menu-icon");
 
-    // Apply style change only for mobile devices (screen width <= 768px)
+    // Apply style change only for mobile devices (screen width <= 450px)
     if (window.innerWidth <= 450) {
         subRedditContainer.style.display = "none"; // Hide the subreddit container on click
     }
