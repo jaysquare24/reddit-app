@@ -31,10 +31,19 @@ export const NewsDetails = () => {
         if (visibleCommentId === id) {
             setVisibleCommentId(null); // Hide comments if already visible
         } else {
-            setVisibleCommentId(id); // Show selected comment section
+            setVisibleCommentId(id);   // Show selected comment section
             dispatch(fetchCommentsDetails(commentLink));
+
+            // Scroll the post into view after the DOM updates
+            setTimeout(() => {
+                const element = document.getElementById(`post-${id}`);
+                if (element) {
+                    element.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }
+            }, 100); // Delay allows DOM to render new comment section
         }
     };
+
 
     return (
                    
@@ -55,6 +64,7 @@ export const NewsDetails = () => {
                     <p
                         className="comments"
                         onClick={() => handleClick(id, news.commentLink)}
+                        id={`post-${id}`}
                     >
                         <img 
                             src="https://img.icons8.com/?size=100&id=47732&format=png&color=FFFFFF" 
