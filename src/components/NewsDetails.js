@@ -38,7 +38,7 @@ export const NewsDetails = () => {
             setTimeout(() => {
                 const element = document.getElementById(`post-${id}`);
                 if (element) {
-                    element.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                    element.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 }
             }, 100); // Delay allows DOM to render new comment section
         }
