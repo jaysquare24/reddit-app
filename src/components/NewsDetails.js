@@ -46,7 +46,9 @@ export const NewsDetails = () => {
             Object.entries(newsData).map(([id, news]) => (
             <div key={id} className="news-item">
                 <h4>{news.title}</h4>
-                <img className="news-image" src={news.image} alt={news.title} />
+                <img className="news-image" src={news.image} alt={news.title} 
+                  onError={(e) => (e.target.style.display = 'none')}
+                />
                 <div className="news-bottom">
                     <p>Posted By: <span className="profile-username">{news.postedBy}</span></p>
                     <p>{getRelativeTime(news.createdAt)}</p>
