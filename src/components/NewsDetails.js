@@ -58,6 +58,7 @@ export const NewsDetails = () => {
               className="news-image"
               src={news.image}
               alt={news.title}
+              loading="lazy"
               onError={(e) => (e.target.style.display = "none")}
             />
           )}

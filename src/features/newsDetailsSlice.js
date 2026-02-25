@@ -20,19 +20,28 @@ export const fetchNews = createAsyncThunk(
     }
     const data = await response.json();
 
-    
-    return data.data.children.map((item) => ({
-    newsId: item.data.name,
-    subreddit: subReddit, // store subreddit
-    postId: item.data.id, // store postId
-    commentLink: item.data.permalink,
-    title: item.data.title,
-    image: item.data.url || null,
-    postedBy: item.data.author,
-    createdAt: item.data.created_utc * 1000,
-    numOfComments: item.data.num_comments,
-    numOfLikes: item.data.ups,
-    }));
+  
+    return data.data.children.map((item) => {
+    const post = item.data;
+
+    const image =
+      post.preview?.images?.[0]?.resolutions?.[2]?.url?.replace(/&amp;/g, "&") ||
+      (post.thumbnail && post.thumbnail.startsWith("http") ? post.thumbnail : null) ||
+      (post.url && post.url.match(/\.(jpg|jpeg|png|webp)$/i) ? post.url : null);
+
+    return {
+      newsId: post.name,
+      subreddit: subReddit,
+      postId: post.id,
+      commentLink: post.permalink,
+      title: post.title,
+      image,
+      postedBy: post.author,
+      createdAt: post.created_utc * 1000,
+      numOfComments: post.num_comments,
+      numOfLikes: post.ups,
+    };
+  });
   } catch (error) {
     return rejectWithValue(error.message);
   }
