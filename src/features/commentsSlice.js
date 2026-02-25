@@ -1,12 +1,12 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-
+const baseUrl = process.env.REACT_APP_API_URL || "";
 // Async thunk
 export const fetchCommentsDetails = createAsyncThunk(
   "comments/fetchComments",
   async ({ subreddit, postId }, { rejectWithValue }) => {
     try {
       
-      const response = await fetch(`http://localhost:5000/api/comments/${subreddit}/${postId}`,  
+      const response = await fetch(`${baseUrl}/api/comments/${subreddit}/${postId}`,  
         {
             headers: {
             "User-Agent": "reddit-client-app"

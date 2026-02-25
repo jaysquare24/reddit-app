@@ -1,12 +1,14 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { createSelector } from "reselect";
 
+const baseUrl = process.env.REACT_APP_API_URL || "";
+
 // Async thunk to fetch news from backend proxy
 export const fetchNews = createAsyncThunk(
   "news/fetchNews",
   async (subReddit = "pics", { rejectWithValue }) => {
   try {
-    const response = await fetch(`http://localhost:5000/api/${subReddit}`,
+    const response = await fetch(`${baseUrl}/api/${subReddit}`,
       {
         headers: {
           "User-Agent": "reddit-client-app"
